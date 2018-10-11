@@ -7,7 +7,7 @@ use std::io;
 fn main() {
     println!("Guess the number!");
     let secret_number = rand::thread_rng().gen_range(1, 101);
-
+    let mut number_of_guesses = 0;
     loop {
         println!("please input guess");
         let mut guess = String::new();
@@ -23,6 +23,7 @@ fn main() {
                 continue;
             }
         };
+        number_of_guesses += 1;
         println!("You guessed: {}", guess);
 
         match guess.cmp(&secret_number) {
@@ -30,6 +31,7 @@ fn main() {
             Ordering::Greater => println!("Too big"),
             Ordering::Equal => {
                 println!("you win");
+                println!("your score is {}", 100 / number_of_guesses);
                 break;
             }
         }
